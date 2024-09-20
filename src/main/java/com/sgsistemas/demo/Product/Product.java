@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ import java.math.BigDecimal;
 @Entity(name = "product")
 public class Product extends EntityId {
     @Column(name = "name")
+    @NotBlank(message = "O nome do produto não pode estar em branco")  // Validação
     private String name;
 
     @Column(name = "price")
@@ -25,10 +28,7 @@ public class Product extends EntityId {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "registrationDate")
-    private Data registrationDate;
-
     @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false)
+    @JoinColumn(name = "supplier_id", nullable = false)//Chave estrangeira
     private Supplier supplier;
 }

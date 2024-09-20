@@ -1,9 +1,6 @@
 package com.sgsistemas.demo.Helpers;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +9,7 @@ import lombok.Setter;
 @MappedSuperclass
 public class EntityId {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_seq")
+    @SequenceGenerator(name = "entity_seq", sequenceName = "entity_seq", allocationSize = 1)//Adicionado após visualizar que hibernate não estava seguindo ordem de id
     private Long id;
 }
-
-
